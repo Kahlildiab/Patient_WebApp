@@ -1,0 +1,57 @@
+﻿@model WebApp_Patient.Models.Address
+@{
+    ViewData["Title"] = "Create Address";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Create New Address</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" asp-controller="Addresses" method="post">
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label asp-for="Country" class="form-label"></label>
+                        <input asp-for="Country" class="form-control" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Region" class="form-label"></label>
+                        <input asp-for="Region" class="form-control" />
+                        <span asp-validation-for="Region" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="City" class="form-label"></label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="address" class="form-label"></label>
+                        <input asp-for="address" class="form-control" />
+                        <span asp-validation-for="address" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="BusinessAddress" class="form-label"></label>
+                        <input asp-for="BusinessAddress" class="form-control" />
+                        <span asp-validation-for="BusinessAddress" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="BusinessTelephone" class="form-label"></label>
+                        <input asp-for="BusinessTelephone" class="form-control" />
+                        <span asp-validation-for="BusinessTelephone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="mt-4 d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        ⬅ Back
+                    </a>
+                    <button type="submit" class="btn btn-success px-4">
+                        💾 Create
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

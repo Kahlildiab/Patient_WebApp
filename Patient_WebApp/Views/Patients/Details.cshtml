@@ -1,0 +1,89 @@
+﻿@model Patient
+
+@{
+    ViewData["Title"] = "Patient Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Patient Details</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+                    <strong>File No:</strong>
+                    <p class="text-muted">@Model.FileNo</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Full Name:</strong>
+                    <p class="text-muted">@($"{Model.FirstName} {Model.SecondName} {Model.ThirdName} {Model.FamilyName}")</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>National No:</strong>
+                    <p class="text-muted">@Model.NationalNo</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Mother Name:</strong>
+                    <p class="text-muted">@Model.MotherName</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>DOB:</strong>
+                    <p class="text-muted">@Model.DOB</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Age:</strong>
+                    <p class="text-muted">@Model.Age</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Place Of Birth:</strong>
+                    <p class="text-muted">@Model.PlaceOfBirth</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Telephone:</strong>
+                    <p class="text-muted">@Model.TelephoneNo</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Email:</strong>
+                    <p class="text-muted">@Model.Email</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Gender:</strong>
+                    <p class="text-muted">@Model.Gender</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Nationality:</strong>
+                    <p class="text-muted">@Model.Nationality</p>
+                </div>
+
+                <div class="col-md-12">
+                    <strong>Comments:</strong>
+                    <p class="text-muted">@Model.Comments</p>
+                </div>
+
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="Index" class="btn btn-secondary">
+                    ⬅ Back to List
+                </a>
+
+                <a asp-action="Edit" asp-route-id="@Model.PatientId" class="btn btn-info px-4">
+                    ✏ Edit
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

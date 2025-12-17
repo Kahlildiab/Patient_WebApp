@@ -1,0 +1,77 @@
+﻿@model WebApp_Patient.Models.PatientReference
+
+@{
+    ViewData["Title"] = "Delete Patient Reference";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">⚠ Delete Patient Reference</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <strong>Are you sure?</strong> This action cannot be undone.
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Reference Name:</strong>
+                    <p class="text-muted">@Model.ReferenceName</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Telephone:</strong>
+                    <p class="text-muted">@Model.Telephone</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Relationship:</strong>
+                    <p class="text-muted">@Model.RelationShip</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Address:</strong>
+                    <p class="text-muted">@Model.Address</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Religion:</strong>
+                    <p class="text-muted">@Model.Religion</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Nationality:</strong>
+                    <span class="badge bg-secondary">@Model.Nationality</span>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>National No:</strong>
+                    <p class="text-muted">@Model.NationalNo</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Patient:</strong>
+                    <span class="badge bg-primary">
+                        @Model.Patient?.FamilyName
+                    </span>
+                </div>
+            </div>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="ReferenceId" />
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        ⬅ Cancel
+                    </a>
+
+                    <button type="submit" class="btn btn-danger px-4">
+                        🗑 Confirm Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

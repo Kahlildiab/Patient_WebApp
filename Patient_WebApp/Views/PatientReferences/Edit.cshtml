@@ -1,0 +1,86 @@
+﻿@model WebApp_Patient.Models.PatientReference
+
+@{
+    ViewData["Title"] = "Edit Patient Reference";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">Edit Patient Reference</h4>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+                <input type="hidden" asp-for="ReferenceId" />
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label asp-for="PatientId" class="form-label"></label>
+                        <select asp-for="PatientId" class="form-select"
+                                asp-items="ViewBag.PatientId"></select>
+                        <span asp-validation-for="PatientId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="ReferenceName" class="form-label"></label>
+                        <input asp-for="ReferenceName" class="form-control" />
+                        <span asp-validation-for="ReferenceName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Telephone" class="form-label"></label>
+                        <input asp-for="Telephone" class="form-control" />
+                        <span asp-validation-for="Telephone" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="RelationShip" class="form-label"></label>
+                        <input asp-for="RelationShip" class="form-control" />
+                        <span asp-validation-for="RelationShip" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label asp-for="Address" class="form-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Religion" class="form-label"></label>
+                        <input asp-for="Religion" class="form-control" />
+                        <span asp-validation-for="Religion" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Nationality" class="form-label"></label>
+                        <input asp-for="Nationality" class="form-control" />
+                        <span asp-validation-for="Nationality" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="NationalNo" class="form-label"></label>
+                        <input asp-for="NationalNo" class="form-control" />
+                        <span asp-validation-for="NationalNo" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        ⬅ Back
+                    </a>
+
+                    <button type="submit" class="btn btn-warning px-4">
+                        💾 Update
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

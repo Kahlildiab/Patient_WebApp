@@ -1,0 +1,150 @@
+﻿@model Patient
+
+@{
+    ViewData["Title"] = "Edit Patient";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Edit Patient</h4>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="PatientId" />
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FileNo" class="form-label"></label>
+                        <input asp-for="FileNo" class="form-control" />
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FirstName" class="form-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="SecondName" class="form-label"></label>
+                        <input asp-for="SecondName" class="form-control" />
+                        <span asp-validation-for="SecondName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ThirdName" class="form-label"></label>
+                        <input asp-for="ThirdName" class="form-control" />
+                        <span asp-validation-for="ThirdName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FamilyName" class="form-label"></label>
+                        <input asp-for="FamilyName" class="form-control" />
+                        <span asp-validation-for="FamilyName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="NationalNo" class="form-label"></label>
+                        <input asp-for="NationalNo" class="form-control" />
+                        <span asp-validation-for="NationalNo" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="MotherName" class="form-label"></label>
+                        <input asp-for="MotherName" class="form-control" />
+                        <span asp-validation-for="MotherName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="DOB" class="form-label"></label>
+                        <input asp-for="DOB" type="date" class="form-control" />
+                        <span asp-validation-for="DOB" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Age" class="form-label"></label>
+                        <input asp-for="Age" class="form-control" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="PlaceOfBirth" class="form-label"></label>
+                        <input asp-for="PlaceOfBirth" class="form-control" />
+                        <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="TelephoneNo" class="form-label"></label>
+                        <input asp-for="TelephoneNo" class="form-control" />
+                        <span asp-validation-for="TelephoneNo" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Gender</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Gender" value="Male" id="genderMale" />
+                            <label class="form-check-label" for="genderMale">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Gender" value="Female" id="genderFemale" />
+                            <label class="form-check-label" for="genderFemale">Female</label>
+                        </div>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Nationality" class="form-label"></label>
+                        <select asp-for="Nationality" class="form-control">
+                            <option value="">-- Select Nationality --</option>
+                            <option value="Algerian">Algerian</option>
+                            <option value="Bahraini">Bahraini</option>
+                            <option value="Comorian">Comorian</option>
+                            <option value="Djiboutian">Djiboutian</option>
+                            <option value="Egyptian">Egyptian</option>
+                            <option value="Emirati">Emirati</option>
+                            <option value="Iraqi">Iraqi</option>
+                            <option value="Jordanian">Jordanian</option>
+                            <option value="Kuwaiti">Kuwaiti</option>
+                            <option value="Lebanese">Lebanese</option>
+                            <option value="Libyan">Libyan</option>
+                            <option value="Mauritanian">Mauritanian</option>
+                            <option value="Moroccan">Moroccan</option>
+                            <option value="Omani">Omani</option>
+                            <option value="Palestinian">Palestinian</option>
+                            <option value="Qatari">Qatari</option>
+                            <option value="Saudi">Saudi</option>
+                            <option value="Somali">Somali</option>
+                            <option value="Sudanese">Sudanese</option>
+                            <option value="Syrian">Syrian</option>
+                            <option value="Tunisian">Tunisian</option>
+                            <option value="Yemeni">Yemeni</option>
+                        </select>
+                        <span asp-validation-for="Nationality" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="Comments" class="form-label"></label>
+                        <textarea asp-for="Comments" class="form-control"></textarea>
+                        <span asp-validation-for="Comments" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">⬅ Back to List</a>
+                    <button type="submit" class="btn btn-primary px-4">💾 Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <a asp-controller="Addresses" asp-action="Create" class="btn btn-primary btn-lg w-100" method="post">
+                Add Address
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a asp-controller="PatientReferences" asp-action="Create" class="btn btn-success btn-lg w-100" method="post">
+                Add Patient Reference
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a asp-controller="Patients" asp-action="Create" class="btn btn-warning btn-lg w-100" method="post">
+                Add Patient
+            </a>
+        </div>
+    </div>
+</div>

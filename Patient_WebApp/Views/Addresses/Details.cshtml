@@ -1,0 +1,59 @@
+﻿@model WebApp_Patient.Models.Address
+
+@{
+    ViewData["Title"] = "Address Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Address Details</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+                    <strong>Country:</strong>
+                    <p class="text-muted">@Model.Country</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Region:</strong>
+                    <p class="text-muted">@Model.Region</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>City:</strong>
+                    <p class="text-muted">@Model.City</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Address:</strong>
+                    <p class="text-muted">@Model.address</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Business Address:</strong>
+                    <p class="text-muted">@Model.BusinessAddress</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Business Telephone:</strong>
+                    <span class="badge bg-primary">@Model.BusinessTelephone</span>
+                </div>
+
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="Index" class="btn btn-secondary">
+                    ⬅ Back to List
+                </a>
+
+                <a asp-action="Edit" asp-route-id="@Model.AddressId" class="btn btn-info px-4">
+                    ✏ Edit
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

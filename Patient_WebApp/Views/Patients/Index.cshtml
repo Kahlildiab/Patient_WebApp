@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Patient>
+
+@{
+    ViewData["Title"] = "Patients List";
+}
+
+<h1 class="mb-4">Patients List</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create" method="post">Create New Patient</a>
+</p>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FileNo)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.SecondName)</th>
+            <th>@Html.DisplayNameFor(model => model.ThirdName)</th>
+            <th>@Html.DisplayNameFor(model => model.FamilyName)</th>
+            <th>@Html.DisplayNameFor(model => model.NationalNo)</th>
+            <th>@Html.DisplayNameFor(model => model.MotherName)</th>
+            <th>@Html.DisplayNameFor(model => model.DOB)</th>
+            <th>@Html.DisplayNameFor(model => model.Age)</th>
+            <th>@Html.DisplayNameFor(model => model.PlaceOfBirth)</th>
+            <th>@Html.DisplayNameFor(model => model.TelephoneNo)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            <th>@Html.DisplayNameFor(model => model.Nationality)</th>
+            <th>@Html.DisplayNameFor(model => model.Comments)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patient in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => patient.FileNo)</td>
+                <td>@Html.DisplayFor(m => patient.FirstName)</td>
+                <td>@Html.DisplayFor(m => patient.SecondName)</td>
+                <td>@Html.DisplayFor(m => patient.ThirdName)</td>
+                <td>@Html.DisplayFor(m => patient.FamilyName)</td>
+                <td>@Html.DisplayFor(m => patient.NationalNo)</td>
+                <td>@Html.DisplayFor(m => patient.MotherName)</td>
+                <td>@Html.DisplayFor(m => patient.DOB) </td>
+                <td>@Html.DisplayFor(m => patient.Age)</td>
+                <td>@Html.DisplayFor(m => patient.PlaceOfBirth)</td>
+                <td>@Html.DisplayFor(m => patient.TelephoneNo)</td>
+                <td>@Html.DisplayFor(m => patient.Email)</td>
+                <td>@Html.DisplayFor(m => patient.Gender)</td>
+                <td>@Html.DisplayFor(m => patient.Nationality)</td>
+                <td>@Html.DisplayFor(m => patient.Comments)</td>
+                <td>
+                    <a class="btn btn-sm btn-warning me-1" asp-action="Edit" asp-route-id="@patient.PatientId">Edit</a>
+                    <a class="btn btn-sm btn-info me-1" asp-action="Details" asp-route-id="@patient.PatientId">Details</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@patient.PatientId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

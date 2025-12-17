@@ -1,0 +1,65 @@
+﻿@model WebApp_Patient.Models.Address
+
+@{
+    ViewData["Title"] = "Delete Address";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">⚠ Delete Address</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <strong>Are you sure?</strong> This action cannot be undone.
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Country:</strong>
+                    <p class="text-muted">@Model.Country</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Region:</strong>
+                    <p class="text-muted">@Model.Region</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>City:</strong>
+                    <p class="text-muted">@Model.City</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Address:</strong>
+                    <p class="text-muted">@Model.address</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Business Address:</strong>
+                    <p class="text-muted">@Model.BusinessAddress</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Business Telephone:</strong>
+                    <span class="badge bg-primary">@Model.BusinessTelephone</span>
+                </div>
+            </div>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="AddressId" />
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        ⬅ Cancel
+                    </a>
+
+                    <button type="submit" class="btn btn-danger px-4">
+                        🗑 Confirm Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
