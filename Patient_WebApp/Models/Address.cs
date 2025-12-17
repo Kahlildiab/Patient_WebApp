@@ -7,7 +7,7 @@
         public string Region { get; set; }
 
         public string City { get; set; }
-        public string address { get; set; }
+        public string Addresses { get; set; }
         public string BusinessAddress { get; set; }
         public string BusinessTelephone { get; set; }
     }

@@ -16,15 +16,15 @@ public class Patient
     [StringLength(50)]
     public string FirstName { get; set; }
 
-    [Required(ErrorMessage = "Second Name is required")]
+   [Required(ErrorMessage = "Second Name is required")]
     [StringLength(50)]
     public string SecondName { get; set; }
 
-    [Required(ErrorMessage = "Third Name is required")]
+   [Required(ErrorMessage = "Third Name is required")]
     [StringLength(50)]
     public string ThirdName { get; set; }
 
-    [Required(ErrorMessage = "Family Name is required")]
+[Required(ErrorMessage = "Family Name is required")]
     [StringLength(50)]
     public string FamilyName { get; set; }
 
@@ -33,7 +33,7 @@ public class Patient
     public string NationalNo { get; set; }
 
     [StringLength(150)]
-    [Required(ErrorMessage = "Mother Name is required")]
+   [Required(ErrorMessage = "Mother Name is required")]
     public string MotherName { get; set; }
 
     [DataType(DataType.Date)]
@@ -54,13 +54,13 @@ public class Patient
     [EmailAddress(ErrorMessage = "Invalid email format")]
     public string Email { get; set; }
 
-    [Required(ErrorMessage = "Gender is required")]
+   [Required(ErrorMessage = "Gender is required")]
     [Range(1, int.MaxValue, ErrorMessage = "Select Gender")]
-    public int Gender { get; set; }
+    public string Gender { get; set; }
 
-    [Required(ErrorMessage = "Nationality is required")]
+   [Required(ErrorMessage = "Nationality is required")]
     [Range(1, int.MaxValue, ErrorMessage = "Please select Nationality")]
-    public int Nationality { get; set; }
+    public string Nationality { get; set; }
 
     [StringLength(500)]
     public string Comments { get; set; }

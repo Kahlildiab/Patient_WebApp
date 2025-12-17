@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WebApp_Patient.Data;
 using WebApp_Patient.Models;
 
@@ -20,145 +17,104 @@ namespace Patient_WebApp.Controllers
         }
 
         // GET: PatientReferences
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? patientId)
         {
-            var applicationDbContext = _context.PatientReferences.Include(p => p.Patient);
-            return View(await applicationDbContext.ToListAsync());
-        }
+            var query = _context.PatientReferences.Include(p => p.Patient).AsQueryable();
 
-        // GET: PatientReferences/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            if (patientId.HasValue)
             {
-                return NotFound();
+                query = query.Where(r => r.PatientId == patientId.Value);
             }
 
-            var patientReference = await _context.PatientReferences
-                .Include(p => p.Patient)
-                .FirstOrDefaultAsync(m => m.ReferenceId == id);
-            if (patientReference == null)
-            {
-                return NotFound();
-            }
-
-            return View(patientReference);
+            return View(await query.ToListAsync());
         }
 
         // GET: PatientReferences/Create
-        public IActionResult Create()
+        [HttpGet]
+        public IActionResult Create(int patientId)
         {
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FamilyName");
+            ViewBag.PatientId = patientId;
             return View();
         }
 
         // POST: PatientReferences/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReferenceId,PatientId,ReferenceName,Telephone,RelationShip,Address,Religion,Nationality,NationalNo")] PatientReference patientReference)
+        public async Task<IActionResult> Create(PatientReference reference)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(patientReference);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.PatientId = reference.PatientId;
+                return View(reference);
             }
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FamilyName", patientReference.PatientId);
-            return View(patientReference);
+
+            _context.PatientReferences.Add(reference);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { patientId = reference.PatientId });
         }
 
         // GET: PatientReferences/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var patientReference = await _context.PatientReferences.FindAsync(id);
-            if (patientReference == null)
-            {
-                return NotFound();
-            }
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FamilyName", patientReference.PatientId);
-            return View(patientReference);
+            var reference = await _context.PatientReferences.FindAsync(id);
+            if (reference == null) return NotFound();
+
+            return View(reference);
         }
 
-        // POST: PatientReferences/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReferenceId,PatientId,ReferenceName,Telephone,RelationShip,Address,Religion,Nationality,NationalNo")] PatientReference patientReference)
+        public async Task<IActionResult> Edit(int id, PatientReference reference)
         {
-            if (id != patientReference.ReferenceId)
+            if (id != reference.ReferenceId) return NotFound();
+
+            if (!ModelState.IsValid) return View(reference);
+
+            try
             {
-                return NotFound();
+                _context.Update(reference);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.PatientReferences.Any(e => e.ReferenceId == reference.ReferenceId))
+                    return NotFound();
+                else
+                    throw;
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(patientReference);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PatientReferenceExists(patientReference.ReferenceId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FamilyName", patientReference.PatientId);
-            return View(patientReference);
+            return RedirectToAction("Index", new { patientId = reference.PatientId });
         }
 
         // GET: PatientReferences/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var patientReference = await _context.PatientReferences
+            var reference = await _context.PatientReferences
                 .Include(p => p.Patient)
-                .FirstOrDefaultAsync(m => m.ReferenceId == id);
-            if (patientReference == null)
-            {
-                return NotFound();
-            }
+                .FirstOrDefaultAsync(r => r.ReferenceId == id);
 
-            return View(patientReference);
+            if (reference == null) return NotFound();
+
+            return View(reference);
         }
 
-        // POST: PatientReferences/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var patientReference = await _context.PatientReferences.FindAsync(id);
-            if (patientReference != null)
+            var reference = await _context.PatientReferences.FindAsync(id);
+            if (reference != null)
             {
-                _context.PatientReferences.Remove(patientReference);
+                _context.PatientReferences.Remove(reference);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool PatientReferenceExists(int id)
-        {
-            return _context.PatientReferences.Any(e => e.ReferenceId == id);
+            return RedirectToAction("Index", new { patientId = reference?.PatientId });
         }
     }
 }

@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using WebApp_Patient.Data;
+using WebApp_Patient.Models;
 
 namespace Patient_WebApp.Controllers
 {
@@ -18,13 +20,11 @@ namespace Patient_WebApp.Controllers
             _context = context;
         }
 
-        // GET: Patients
         public async Task<IActionResult> Index()
         {
             return View(await _context.Patients.ToListAsync());
         }
 
-        // GET: Patients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,29 +42,33 @@ namespace Patient_WebApp.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Patients/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PatientId,FileNo,FirstName,SecondName,ThirdName,FamilyName,NationalNo,MotherName,DOB,Age,PlaceOfBirth,TelephoneNo,Email,Gender,Nationality,Comments")] Patient patient)
+        public async Task<IActionResult> Create( Patient patient)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(patient);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(patient);
-        }
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
 
-        // GET: Patients/Edit/5
+                return View(patient);
+            }
+
+            _context.Add(patient);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Patient created successfully!";
+            return RedirectToAction(nameof(Index));
+        }
+       
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,12 +84,10 @@ namespace Patient_WebApp.Controllers
             return View(patient);
         }
 
-        // POST: Patients/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PatientId,FileNo,FirstName,SecondName,ThirdName,FamilyName,NationalNo,MotherName,DOB,Age,PlaceOfBirth,TelephoneNo,Email,Gender,Nationality,Comments")] Patient patient)
+        public async Task<IActionResult> Edit(int id, Patient patient)
         {
             if (id != patient.PatientId)
             {
@@ -115,7 +117,6 @@ namespace Patient_WebApp.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,7 +134,6 @@ namespace Patient_WebApp.Controllers
             return View(patient);
         }
 
-        // POST: Patients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

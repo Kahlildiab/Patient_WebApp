@@ -12,7 +12,7 @@
 
         <div class="card-body">
             <form asp-action="Create" asp-controller="Patients" method="post">
-                <div asp-validation-summary="All"  class="alert alert-danger"></div>
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
 
                 <div class="row g-3">
 
@@ -24,7 +24,7 @@
 
                     <div class="col-md-6">
                         <label asp-for="NationalNo" class="form-label"></label>
-                        <input asp-for="NationalNo" class="form-control" />
+                        <input asp-for="NationalNo" class="form-control" /> 
                         <span asp-validation-for="NationalNo" class="text-danger"></span>
                     </div>
 

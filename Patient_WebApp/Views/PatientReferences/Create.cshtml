@@ -14,10 +14,9 @@
             <form asp-action="Create" asp-controller="PatientReferences" method="post">
                 <div asp-validation-summary="All" class="alert alert-danger"></div>
 
+                <input type="hidden" asp-for="PatientId" value="@ViewBag.PatientId" />
+
                 <div class="row g-3">
-
-                    
-
                     <div class="col-md-6">
                         <label asp-for="ReferenceName" class="form-label"></label>
                         <input asp-for="ReferenceName" class="form-control" />
@@ -49,36 +48,29 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="NationalNo" class="form-label"></label>
-                        <select asp-for="NationalNo" class="form-select">
+                        <label asp-for="Nationality" class="form-label">Nationality</label>
+                        <select asp-for="Nationality" class="form-select">
                             <option value="">-- Select Nationality --</option>
-                            <option value="1">Egyptian</option>
-                            <option value="2">Saudi</option>
-                            <option value="3">Syrian</option>
-                            <option value="4">Jordanian</option>
-                            <option value="5">Lebanese</option>
-                            <option value="6">Iraqi</option>
-                            <option value="7">Palestinian</option>
-                            <option value="8">Emirati</option>
-                            <option value="9">Kuwaiti</option>
-                            <option value="10">Qatari</option>
-                            <option value="11">Omani</option>
-                            <option value="12">Yemeni</option>
+                            <option>Egyptian</option>
+                            <option>Saudi</option>
+                            <option>Syrian</option>
+                            <option>Jordanian</option>
+                            <option>Lebanese</option>
+                            <option>Iraqi</option>
+                            <option>Palestinian</option>
+                            <option>Emirati</option>
+                            <option>Kuwaiti</option>
+                            <option>Qatari</option>
+                            <option>Omani</option>
+                            <option>Yemeni</option>
                         </select>
                         <span asp-validation-for="Nationality" class="text-danger"></span>
                     </div>
-
-
                 </div>
 
                 <div class="mt-4 d-flex justify-content-between">
-                    <a asp-action="Index" class="btn btn-secondary">
-                        ⬅ Back
-                    </a>
-
-                    <button type="submit" class="btn btn-success px-4">
-                        💾 Create
-                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">⬅ Back</a>
+                    <button type="submit" class="btn btn-success px-4">💾 Create</button>
                 </div>
             </form>
         </div>

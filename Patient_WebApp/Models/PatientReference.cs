@@ -9,7 +9,6 @@ namespace WebApp_Patient.Models
 
         public int PatientId { get; set; }
 
-        [Required]
         [StringLength(150)]
         public string ReferenceName { get; set; }
 

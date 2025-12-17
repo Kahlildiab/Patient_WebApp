@@ -37,20 +37,24 @@ namespace Patient_WebApp.Controllers
         {
             return View();
         }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Country,Region,City,address,BusinessAddress,BusinessTelephone")] Address address)
+        public async Task<IActionResult> Create(Address address)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(address);
-                await _context.SaveChangesAsync();
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
 
-                TempData["SuccessMessage"] = "Address created successfully!";
-                return RedirectToAction(nameof(Index));
+                return View(address);
             }
-            return View(address);
+
+            _context.Add(address);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Address created successfully!";
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -65,7 +69,7 @@ namespace Patient_WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AddressId,Country,Region,City,address,BusinessAddress,BusinessTelephone")] Address address)
+        public async Task<IActionResult> Edit(int id,  Address address)
         {
             if (id != address.AddressId) return NotFound();
 
